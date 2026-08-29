@@ -475,3 +475,53 @@
   animation: pulseRing 2.5s infinite;
 }
 .whatsapp-float svg { width: 30px; height: 30px; color: #FFF; }
+.about-image-col { display: flex; flex-direction: column; gap: 15px; }
+.about-col-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--pink-main);
+}
+.about-text .about-col-title { color: var(--turquoise-main); }
+.nl-map-card {
+  background: #FFF; border: 1px solid var(--border-color); border-radius: 12px;
+  padding: 30px; text-align: center; margin-top: 30px; margin-bottom: 60px;
+}
+.nl-map-card h4 {
+  font-family: var(--font-serif); color: var(--turquoise-main);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;
+}
+.nl-map { width: 100%; max-width: 260px; height: auto; }
+.nl-outline { fill: var(--turquoise-light); stroke: var(--turquoise-main); stroke-width: 2; }
+.brabant-outline { fill: rgba(224,129,131,0.15); stroke: #E02020; stroke-width: 2.5; }
+.city-dot { fill: #E02020; }
+.nl-map-legend {
+  display: flex; flex-direction: column; gap: 6px; margin-top: 15px;
+  font-size: 0.75rem; color: var(--text-muted);
+}
+.legend-swatch {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+  margin-right: 6px; vertical-align: middle;
+}
+.legend-swatch.brabant { background: rgba(224,129,131,0.3); border: 2px solid #E02020; }
+.legend-swatch.dot { background: #E02020; }
+.reviews-strip { padding: 10px 0 70px; }
+.reviews-track {
+  display: flex; gap: 20px; overflow-x: auto; padding: 10px 4px 20px;
+  scroll-snap-type: x mandatory;
+}
+.reviews-track::-webkit-scrollbar { height: 6px; }
+.reviews-track::-webkit-scrollbar-thumb { background: var(--gold-accent); border-radius: 10px; }
+.review-card {
+  flex: 0 0 260px; scroll-snap-align: start;
+  background: #FFF; border: 1px solid var(--border-color); border-radius: 14px;
+  padding: 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+.review-stars { color: var(--gold-accent); font-size: 0.95rem; margin-bottom: 10px; letter-spacing: 2px; }
+.review-text { font-size: 0.85rem; color: var(--text-dark); font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+.review-author { font-size: 0.75rem; font-weight: 600; color: var(--turquoise-main); text-transform: uppercase; letter-spacing: 0.5px; }
+
+@media (max-width: 600px) {
+  .review-card { flex: 0 0 220px; }
+}
