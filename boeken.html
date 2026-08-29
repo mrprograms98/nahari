@@ -5,27 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boek Uw Rit | THE NAHARI LADY'S</title>
   <meta name="description" content="Boek eenvoudig jouw rit bij The Nahari Lady's. Kies een beschikbare datum en tijd in de kalender.">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- PRELOADER -->
   <div id="preloader">
     <div class="preloader-title brand-name">THE NAHARI LADY'S</div>
     <div class="preloader-subtitle">Ladies Only Taxi</div>
   </div>
 
+  <!-- DYNAMISCHE HOVER PREVIEW BOX -->
   <div class="hover-preview-box" id="hoverPreview"></div>
 
+  <!-- MOBIEL SLIDE-IN MENU -->
   <div class="mobile-nav-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
   <div class="mobile-sidebar" id="mobileSidebar">
     <div class="mobile-sidebar-preview" id="mobilePreview"></div>
     <ul class="mobile-nav-links">
-      <li><a href="index.html" data-img="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=500&q=80"><span class="m-icon">⌂</span>Home</a></li>
-      <li><a href="over-ons.html" data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80"><span class="m-icon">♥</span>Over Ons</a></li>
-      <li><a href="diensten.html" data-img="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=500&q=80"><span class="m-icon">✦</span>Diensten</a></li>
-      <li><a href="tarieven.html" data-img="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=500&q=80"><span class="m-icon">€</span>Tarieven</a></li>
-      <li><a href="boeken.html" class="active" data-img="nnl.jpg"><span class="m-icon">🚗</span>Boeken</a></li>
-      <li><a href="contact.html" data-img="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=500&q=80"><span class="m-icon">✉</span>Contact</a></li>
+      <li><a href="#home" data-img="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=500&q=80" onclick="toggleMenu()"><span class="m-icon">⌂</span>Home</a></li>
+      <li><a href="#over-ons" data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80" onclick="toggleMenu()"><span class="m-icon">♥</span>Over Ons</a></li>
+      <li><a href="#diensten" data-img="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=500&q=80" onclick="toggleMenu()"><span class="m-icon">✦</span>Diensten</a></li>
+      <li><a href="#tarieven" data-img="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=500&q=80" onclick="toggleMenu()"><span class="m-icon">€</span>Tarieven</a></li>
+      <li><a href="#boeken" data-img="nnl.jpg" onclick="toggleMenu()"><span class="m-icon">🚗</span>Boeken</a></li>
+      <li><a href="#contact" data-img="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=500&q=80" onclick="toggleMenu()"><span class="m-icon">✉</span>Contact</a></li>
     </ul>
     <div>
       <div class="mobile-sidebar-socials social-icons">
@@ -33,62 +36,224 @@
         <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="icon-whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.45 1.29 4.9L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.13.07-1.82-.12-.42-.12-.96-.3-1.65-.6-2.9-1.25-4.8-4.15-4.94-4.34-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.3.38-.43.51-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .12.11.34.29.44.42.29.25.6.5.94.29.15-.1.14-.11.26-.16z"/></svg></a>
         <a href="https://facebook.com" target="_blank" rel="noopener" class="icon-facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.87.24-1.46 1.5-1.46h1.6V4.34C15.8 4.24 14.9 4.13 13.9 4.13c-2.1 0-3.5 1.28-3.5 3.63V10.5H8v3h2.4V21h3.1z"/></svg></a>
       </div>
-      <a href="boeken.html" class="btn-pink" style="justify-content: center; margin-top: 20px; width: 100%;">Boek uw rit &rarr;</a>
+      <a href="#boeken" class="btn-pink" onclick="toggleMenu()" style="justify-content: center; margin-top: 20px; width: 100%;">Boek uw rit &rarr;</a>
     </div>
   </div>
 
+  <!-- NAVBAR -->
   <header>
     <div class="container nav-wrapper">
-      <a href="index.html" class="logo-brand"><img src="nnl.jpg" alt="The Nahari Lady's Logo" class="logo-img"></a>
+      <a href="#home" class="logo-brand">
+        <img src="nnl.jpg" alt="The Nahari Lady's Logo" class="logo-img">
+      </a>
+
       <nav aria-label="Hoofdnavigatie">
         <ul class="nav-links">
-          <li><a href="index.html" data-img="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=300&q=80">Home</a></li>
-          <li><a href="over-ons.html" data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80">Over Ons</a></li>
-          <li><a href="diensten.html" data-img="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=300&q=80">Diensten</a></li>
-          <li><a href="tarieven.html" data-img="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=300&q=80">Tarieven</a></li>
-          <li><a href="boeken.html" class="active" data-img="nnl.jpg">Boeken</a></li>
-          <li><a href="contact.html" data-img="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=300&q=80">Contact</a></li>
+          <li><a href="#home" data-img="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=300&q=80">Home</a></li>
+          <li><a href="#over-ons" data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80">Over Ons</a></li>
+          <li><a href="#diensten" data-img="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=300&q=80">Diensten</a></li>
+          <li><a href="#tarieven" data-img="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=300&q=80">Tarieven</a></li>
+          <li><a href="#boeken" data-img="nnl.jpg">Boeken</a></li>
+          <li><a href="#contact" data-img="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?auto=format&fit=crop&w=300&q=80">Contact</a></li>
         </ul>
       </nav>
-      <a href="boeken.html" class="btn-pink nav-btn-desktop">Boek uw rit &rarr;</a>
-      <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Open Navigatiemenu" id="hamburgerBtn"><span></span><span></span><span></span></button>
+
+      <a href="#boeken" class="btn-pink nav-btn-desktop">Boek uw rit &rarr;</a>
+
+      <button class="hamburger-btn" onclick="toggleMenu()" aria-label="Open Navigatiemenu" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <section class="page-hero">
-    <div class="container">
-      <h1>Boek Uw Rit</h1>
-      <p>Kies eerst een beschikbare datum en tijd in de kalender, vul daarna je gegevens in.</p>
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="container fade-in-up">
+      <div class="hero-text">
+        <span class="hero-subtitle-top">&mdash; Ladies Only Taxi &mdash;</span>
+        <h1>COMFORT<br>SAFETY<br>RESPECT</h1>
+        <div class="hero-subtitle-bottom">Jouw veiligheid, onze prioriteit</div>
+        <p>Een veilige, comfortabele en stijlvolle taxi service alleen voor vrouwen in Helmond en omstreken.</p>
+        <a href="#boeken" class="btn-pink">Boek uw rit &rarr;</a>
+      </div>
+    </div>
+    <div class="hero-wave-bottom">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,40 C200,10 400,70 600,40 C800,10 1000,70 1200,40 L1200,60 L0,60 Z"></path>
+      </svg>
     </div>
   </section>
 
-  <section class="container booking-section fade-in-up" style="margin-top:50px;">
+  <!-- LUXE FEATURE SECTION - VOLLEDIG GOLVEND -->
+  <section class="luxury-features-section fade-in-up">
+    <div class="luxury-wave-edge top">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C150,0 350,60 600,30 C850,0 1050,60 1200,30 L1200,0 L0,0 Z"></path>
+        <path class="gold-trim" d="M0,32 C150,2 350,62 600,32 C850,2 1050,62 1200,32"></path>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="luxury-features-grid">
+        <div class="luxury-feature-item">
+          <span class="icon-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>100% Veilig</h3>
+          <p>Alleen vrouwen, jouw veiligheid is onze prioriteit.</p>
+        </div>
+        <div class="luxury-feature-item">
+          <span class="icon-gold"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 8l4 3 6-7 6 7 4-3-2 11H4L2 8zm2.5 12.5h15v2h-15z"/></svg></span>
+          <h3>Luxe & Comfort</h3>
+          <p>Stijlvolle auto's en comfortabele ritten op jouw manier.</p>
+        </div>
+        <div class="luxury-feature-item">
+          <span class="icon-gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2.2"/></svg></span>
+          <h3>Betrouwbaar</h3>
+          <p>Altijd op tijd, betrouwbare service waar je op kunt rekenen.</p>
+        </div>
+        <div class="luxury-feature-item">
+          <span class="icon-gold"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-1-.6-2.5-1.7C4.9 15.9 2 13 2 9.3 2 6.4 4.3 4 7.2 4c1.7 0 3.3.8 4.3 2.1C12.5 4.8 14.1 4 15.8 4 18.7 4 21 6.4 21 9.3c0 3.7-2.9 6.6-7.5 10C13 20.4 12 21 12 21z"/></svg></span>
+          <h3>Respectvol</h3>
+          <p>Met respect, discretie en vriendelijkheid voor elke rit.</p>
+        </div>
+      </div>
+    </div>
+    <div class="luxury-wave-edge bottom">
+      <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path d="M0,30 C150,0 350,60 600,30 C850,0 1050,60 1200,30 L1200,0 L0,0 Z"></path>
+        <path class="gold-trim" d="M0,32 C150,2 350,62 600,32 C850,2 1050,62 1200,32"></path>
+      </svg>
+    </div>
+  </section>
 
-    <!-- KALENDER MET LEGENDA -->
-    <div class="calendar-panel">
-      <div class="calendar-header">
-        <button type="button" class="cal-nav-btn" onclick="calendarPrevMonth()" aria-label="Vorige maand">&larr;</button>
-        <h4 id="calendarMonthLabel">Maand</h4>
-        <button type="button" class="cal-nav-btn" onclick="calendarNextMonth()" aria-label="Volgende maand">&rarr;</button>
-      </div>
-      <div class="calendar-grid" id="calendarGrid"></div>
-      <div class="calendar-legend">
-        <span><span class="legend-dot beschikbaar"></span> Beschikbaar</span>
-        <span><span class="legend-dot niet-beschikbaar"></span> Niet beschikbaar</span>
-        <span><span class="legend-dot vol"></span> Volgeboekt</span>
-        <span><span class="legend-dot geselecteerd"></span> Geselecteerd</span>
-      </div>
+  <!-- TURQUOISE SECTIE -->
+  <section class="wave-container fade-in-up">
+    <div class="wave-top">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0 C150,90 350,-40 500,50 C650,140 900,10 1200,40 L1200,0 L0,0 Z"></path>
+      </svg>
+    </div>
 
-      <div class="timeslot-panel" id="timeslotPanel" style="display:none;">
-        <h5>Kies een tijdstip</h5>
-        <div class="timeslot-grid" id="timeslotGrid"></div>
-        <div class="selected-date-info" id="selectedDateInfo"></div>
+    <div class="container turquoise-content">
+      <div class="gold-line-divider" style="margin-top:0;">
+<span class="gold-heart-icon" style="background:transparent;">
+  <svg viewBox="0 0 24 24" fill="#D4AF37"><path d="M2 8l4 3 6-7 6 7 4-3-2 11H4L2 8zm2.5 12.5h15v2h-15z"/></svg>
+</span>
       </div>
+      <h2>JOUW RIT, JOUW COMFORT</h2>
+      <p>Wij zorgen ervoor dat jij veilig, ontspannen en op tijd op jouw bestemming aankomt.</p>
+      <a href="#boeken" class="btn-pink">Boek uw rit &rarr;</a>
+
+      <div class="banner-pillars">
+        <div class="banner-pillar-item">
+          <span class="pillar-icon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l3.2 2.4L12 4l5.8 7.4L21 9l-1.8 9H4.8L3 9z" fill="#D4AF37" fill-opacity="0.18" stroke="#D4AF37" stroke-width="1.3"/><circle cx="6.2" cy="9.2" r="0.9" fill="#D4AF37" stroke="none"/><circle cx="12" cy="6.4" r="1" fill="#D4AF37" stroke="none"/><circle cx="17.8" cy="9.2" r="0.9" fill="#D4AF37" stroke="none"/><circle cx="12" cy="9.5" r="1.1" fill="#D4AF37" stroke="none"/><path d="M6 15.5h12" stroke="#D4AF37" stroke-width="1" opacity="0.6"/><path d="M5.5 20.5h13v-1.2h-13z" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/></svg></span>
+          <div><h4>Comfort</h4><p>Rijd in luxe en stijl.</p></div>
+        </div>
+        <div class="banner-pillar-item">
+          <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2l7 2.8v5.5c0 5-3 8.7-7 9.9-4-1.2-7-4.9-7-9.9V6l7-2.8z" stroke="#D4AF37"/><path d="M12 5.6l5 2v4.4c0 4-2.4 6.9-5 7.9-2.6-1-5-3.9-5-7.9V7.6l5-2z" stroke="#63B5B7"/><path d="M9.3 12.2l1.9 1.9 3.6-3.8" stroke="#63B5B7"/></svg></span>
+          <div><h4>Safety</h4><p>Jouw veiligheid is onze prioriteit.</p></div>
+        </div>
+        <div class="banner-pillar-item">
+          <span class="pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2s-1.1-.7-2.7-1.9C5.3 15.4 2.4 12.6 2.4 9c0-2.8 2.2-5 5-5 1.8 0 3.4.9 4.6 2.4C13.2 4.9 14.8 4 16.6 4c2.8 0 5 2.2 5 5 0 3.6-2.9 6.4-6.9 9.3-1.6 1.2-2.7 1.9-2.7 1.9z" stroke="#D4AF37"/><path d="M8.5 8.5c.6-.9 1.4-1.4 2.3-1.4" stroke="#E08183"/></svg></span>
+          <div><h4>Respect</h4><p>Wij behandelen iedereen met respect.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave-bottom">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,80 C300,140 600,10 1200,60 L1200,120 L0,120 Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- OVER ONS -->
+  <section class="container fade-in-up" id="over-ons">
+    <h2 class="section-title">Over Ons</h2>
+    <div class="gold-line-divider">
+      <span class="gold-heart-icon">♥</span>
+    </div>
+    
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Wij zijn twee zussen met een passie voor service, veiligheid en comfort. Vanuit onze eigen ervaring weten wij hoe belangrijk het is om je veilig en op je gemak te voelen tijdens een rit.</p>
+        <p>Daarom hebben wij <span class="brand-name">THE NAHARI LADY'S</span> opgericht: een taxi service speciaal voor vrouwen, door vrouwen.</p>
+        <div class="about-quote">Jouw veiligheid, ons doel.</div>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" alt="Chauffeurs The Nahari Lady's" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- DIENSTEN -->
+  <section class="container fade-in-up" id="diensten">
+    <h2 class="section-title">Diensten</h2>
+    <div class="gold-line-divider">
+      <span class="gold-heart-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-1-.6-2.5-1.7C4.9 15.9 2 13 2 9.3 2 6.4 4.3 4 7.2 4c1.7 0 3.3.8 4.3 2.1C12.5 4.8 14.1 4 15.8 4 18.7 4 21 6.4 21 9.3c0 3.7-2.9 6.6-7.5 10C13 20.4 12 21 12 21z"/></svg></span>
+    </div>
+
+    <div class="services-panel">
+      <div class="services-panel-grid">
+        <div class="service-item">
+          <div class="service-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l1.5-4.5A2 2 0 0 1 6.4 7h11.2a2 2 0 0 1 1.9 1.5L21 13"/><path d="M3 13h18v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H6v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5z"/><circle cx="7.5" cy="17.5" r="1.3"/><circle cx="16.5" cy="17.5" r="1.3"/></svg></div>
+          <h3>Ladies Only Taxi</h3>
+          <p>Vervoer alleen voor vrouwen, door vrouwen. Veilig en vertrouwd.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V4.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V18l-2.5 1.8V21l3.5-1 3.5 1v-1.2L12 18v-4.5z"/></svg></div>
+          <h3>Airport Service</h3>
+          <p>Comfortabel vervoer naar en van de luchthaven. Altijd op tijd.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7.5" width="19" height="12" rx="2"/><path d="M8 7.5V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.5"/><path d="M2.5 12.5h19"/></svg></div>
+          <h3>Zakelijk Vervoer</h3>
+          <p>Stijlvol en betrouwbaar vervoer voor al jouw zakelijke afspraken.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+          <h3>Boodschappen & Meer</h3>
+          <p>Hulp nodig? Wij brengen je waar je heen moet, boodschappen, afspraken en meer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIEVEN -->
+  <section class="container rates-section fade-in-up" id="tarieven">
+    <h2 class="section-title">Tarieven</h2>
+    <div class="gold-line-divider">
+      <span class="gold-heart-icon">♥</span>
+    </div>
+
+    <div class="rates-table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Rit Type</th>
+            <th>Start Tarief</th>
+            <th>Prijs per KM</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Standaard rit (binnenstad)</td><td>€ 5,00</td><td>€ 1,20</td></tr>
+          <tr><td>Rit buiten de stad</td><td>€ 7,50</td><td>€ 1,35</td></tr>
+          <tr><td>Airport Service</td><td>€ 35,00</td><td>incl.</td></tr>
+          <tr><td>Wachttijd (per 15 min)</td><td>€ 5,00</td><td>-</td></tr>
+          <tr><td>Boodschappen / Extra dienst</td><td>In overleg</td><td>In overleg</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- BOEK UW RIT -->
+  <section class="container booking-section fade-in-up" id="boeken">
+    <h2 class="section-title">Boek Uw Rit</h2>
+    <div class="gold-line-divider">
+      <span class="gold-heart-icon">♥</span>
     </div>
 
     <div class="booking-container">
       <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
-
+        
         <!-- STAP 1: SNEL BOEKEN -->
         <div id="step1">
           <h3 style="font-size: 1rem; margin-bottom: 15px; color: var(--turquoise-main);">Stap 1: Snel Boeken</h3>
@@ -110,12 +275,12 @@
               <input type="text" id="bestemming" placeholder="Adres of locatie" required>
             </div>
             <div class="form-group">
-              <label for="datum">Datum * <small style="font-weight:400;">(kies in kalender)</small></label>
-              <input type="date" id="datum" required readonly>
+              <label for="datum">Datum *</label>
+              <input type="date" id="datum" required>
             </div>
             <div class="form-group">
-              <label for="tijd">Tijd * <small style="font-weight:400;">(kies in kalender)</small></label>
-              <input type="time" id="tijd" required readonly>
+              <label for="tijd">Tijd *</label>
+              <input type="time" id="tijd" required>
             </div>
             <div class="form-group full-width">
               <button type="button" class="btn-pink" onclick="goToStep2()" style="width:100%; justify-content:center;">Volgende: Extra Gegevens &rarr;</button>
@@ -123,11 +288,10 @@
           </div>
         </div>
 
-        <!-- STAP 2: EXTRA GEGEVENS -->
+        <!-- STAP 2: EXTRA GEGEVENS & KORTING -->
         <div id="step2">
           <h3 style="font-size: 1rem; margin-bottom: 15px; color: var(--turquoise-main);">Stap 2: Extra Gegevens</h3>
           <div class="form-grid">
-
             <div class="form-group">
               <label for="passagiers">Aantal Passagiers</label>
               <select id="passagiers">
@@ -137,99 +301,15 @@
                 <option value="4">4 Passagiers</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label>Luchthavenrit?</label>
-              <div class="toggle-group">
-                <input type="radio" name="luchthaven" id="luchthavenJa" onchange="toggleField('luchthaven', true)">
-                <label for="luchthavenJa">Ja</label>
-                <input type="radio" name="luchthaven" id="luchthavenNee" onchange="toggleField('luchthaven', false)" checked>
-                <label for="luchthavenNee">Nee</label>
-              </div>
-            </div>
-
-            <div class="conditional-field" id="luchthavenField">
-              <div class="conditional-field-inner">
-                <label for="vluchtnummer">Vluchtnummer</label>
-                <input type="text" id="vluchtnummer" placeholder="Bijv. KL1234">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Kinderzitje gewenst?</label>
-              <div class="toggle-group">
-                <input type="radio" name="kinderzitje" id="kinderzitjeJa" onchange="toggleField('kinderzitje', true)">
-                <label for="kinderzitjeJa">Ja</label>
-                <input type="radio" name="kinderzitje" id="kinderzitjeNee" onchange="toggleField('kinderzitje', false)" checked>
-                <label for="kinderzitjeNee">Nee</label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Heeft u bagage?</label>
-              <div class="toggle-group">
-                <input type="radio" name="bagage" id="bagageJa" onchange="toggleField('bagage', true)">
-                <label for="bagageJa">Ja</label>
-                <input type="radio" name="bagage" id="bagageNee" onchange="toggleField('bagage', false)" checked>
-                <label for="bagageNee">Nee</label>
-              </div>
-            </div>
-
-            <div class="conditional-field" id="kinderzitjeField">
-              <div class="conditional-field-inner">
-                <label for="aantalKinderzitjes">Aantal kinderzitjes (kinderen onder 10 jaar)</label>
-                <input type="number" id="aantalKinderzitjes" min="1" max="4" value="1">
-              </div>
-            </div>
-
-            <div class="conditional-field" id="bagageField">
-              <div class="conditional-field-inner">
-                <label for="soortBagage">Wat voor bagage neemt u mee?</label>
-                <select id="soortBagage">
-                  <option value="koffers">Koffer(s)</option>
-                  <option value="handbagage">Handbagage</option>
-                  <option value="anders">Andere bagage</option>
-                </select>
-                <label for="aantalBagage">Aantal stuks</label>
-                <input type="number" id="aantalBagage" min="1" max="10" value="1">
-              </div>
-            </div>
-
-            <div class="form-group full-width">
-              <label>Heeft u extra zorgbehoeften of reist u met een inklapbare rolstoel?</label>
-              <div class="toggle-group" style="max-width: 300px;">
-                <input type="radio" name="zorg" id="zorgJa" onchange="toggleField('zorg', true)">
-                <label for="zorgJa">Ja</label>
-                <input type="radio" name="zorg" id="zorgNee" onchange="toggleField('zorg', false)" checked>
-                <label for="zorgNee">Nee</label>
-              </div>
-            </div>
-
-            <div class="conditional-field" id="zorgField">
-              <div class="conditional-field-inner">
-                <label for="zorgToelichting">Opmerkingen / toelichting</label>
-                <textarea id="zorgToelichting" rows="2" placeholder="Bijv. welke ondersteuning of hulpmiddel nodig is"></textarea>
-              </div>
-            </div>
-
-            <div class="form-group full-width">
-              <label for="voorkeurRit">Voorkeur tijdens de rit</label>
-              <select id="voorkeurRit" onchange="toggleAndersVeld()">
-                <option value="radio">Radio</option>
-                <option value="muziek">Muziek</option>
-                <option value="stilte">Stilte</option>
-                <option value="geen">Geen voorkeur</option>
-                <option value="anders">Anders, namelijk...</option>
+              <label for="koffers">Aantal Koffers / Bagage</label>
+              <select id="koffers">
+                <option value="0">Geen bagage</option>
+                <option value="1">1 Handbagage/Koffer</option>
+                <option value="2">2 Koffers</option>
+                <option value="3+">3+ Koffers</option>
               </select>
             </div>
-
-            <div class="conditional-field" id="andersField">
-              <div class="conditional-field-inner">
-                <label for="voorkeurAnders">Namelijk</label>
-                <input type="text" id="voorkeurAnders" placeholder="Jouw voorkeur">
-              </div>
-            </div>
-
             <div class="form-group full-width">
               <label for="kortingscode">Kortingscode (bijv. WELKOM10)</label>
               <div style="display:flex; gap:10px;">
@@ -237,18 +317,17 @@
                 <button type="button" class="btn-pink" onclick="applyDiscount()" style="padding: 10px 15px; font-size:0.75rem;">Toepassen</button>
               </div>
             </div>
-
             <div class="form-group full-width">
-              <label for="opmerkingen">Overige opmerkingen</label>
-              <textarea id="opmerkingen" rows="3" placeholder="Bijv. extra tussenstop, andere wens..."></textarea>
+              <label for="opmerkingen">Speciale Wensen / Opmerkingen</label>
+              <textarea id="opmerkingen" rows="3" placeholder="Bijv. kinderzitje nodig, extra tussenstop..."></textarea>
             </div>
-
+            
             <div class="form-group full-width">
               <div class="price-estimate-box">
                 <h4>Geschatte Ritprijs</h4>
                 <div class="price-amount" id="priceDisplay">€ 15,00 - € 22,00</div>
                 <div class="discount-tag" id="discountTag">10% korting toegepast!</div>
-                <small style="font-size: 0.7rem; color: var(--text-muted);">(Definitief tarief wordt vooraf in overleg bevestigd. Let op: het bedrag kan door verkeersdrukte/vertraging veranderen.)</small>
+                <small style="font-size: 0.7rem; color: var(--text-muted);">(Definitief tarief wordt vooraf in overleg bevestigd)</small>
               </div>
             </div>
 
@@ -267,23 +346,202 @@
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section class="container fade-in-up" id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="gold-line-divider">
+      <span class="gold-heart-icon">♥</span>
+    </div>
+
+    <div class="contact-container">
+      <div class="contact-image-wrap">
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Elegante damestas" loading="lazy">
+        <div class="contact-image-caption">Stijlvol onderweg, altijd met een goed gevoel.</div>
+      </div>
+      <div class="contact-grid">
+<div class="contact-item">
+  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+  <h4>Telefoon</h4>
+  <p><a href="tel:+31612345678">06 12345678</a></p>
+</div>
+<div class="contact-item">
+  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 6l10 7 10-7"/></svg></div>
+  <h4>E-mail</h4>
+  <p><a href="mailto:info@nahariladystaxi.nl">info@nahariladystaxi.nl</a></p>
+</div>
+<div class="contact-item">
+  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+  <h4>Locatie</h4>
+  <p>Helmond, Nederland</p>
+</div>
+<div class="contact-item">
+  <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 2.2"/></svg></div>
+  <h4>Bereikbaar</h4>
+  <p>24/7 voor jou</p>
+</div>
+        <div class="contact-item" style="grid-column: span 2;">
+          <h4 style="margin-bottom: 10px;">Volg ons</h4>
+          <div class="social-icons">
+            <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="icon-tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.1 1.8 3.7 4 4.1v2.7c-1.4 0-2.8-.4-4-1.2v6.6c0 3.3-2.7 5.8-5.9 5.6-2.9-.2-5.2-2.6-5.3-5.5-.1-3.2 2.4-5.9 5.6-6v2.8c-1.5.1-2.7 1.4-2.6 2.9.1 1.5 1.4 2.6 2.9 2.5 1.4-.1 2.5-1.3 2.5-2.7V3h2.8z"/></svg></a>
+            <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="icon-whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.45 1.29 4.9L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.13.07-1.82-.12-.42-.12-.96-.3-1.65-.6-2.9-1.25-4.8-4.15-4.94-4.34-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.3.38-.43.51-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .12.11.34.29.44.42.29.25.6.5.94.29.15-.1.14-.11.26-.16z"/></svg></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="icon-facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.87.24-1.46 1.5-1.46h1.6V4.34C15.8 4.24 14.9 4.13 13.9 4.13c-2.1 0-3.5 1.28-3.5 3.63V10.5H8v3h2.4V21h3.1z"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contactformulier -->
+      <form onsubmit="handleContactSubmit(event)" style="display:flex; flex-direction:column; gap:12px;">
+        <h3 style="font-size: 1rem; color: var(--turquoise-main);">Stuur ons een bericht</h3>
+        <input type="text" placeholder="Jouw Naam" required style="padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-cream);">
+        <input type="email" placeholder="Jouw E-mailadres" required style="padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-cream);">
+        <textarea rows="4" placeholder="Jouw bericht of vraag..." required style="padding:10px; border:1px solid var(--border-color); border-radius:6px; background:var(--bg-cream); font-family:inherit;"></textarea>
+        <button type="submit" class="btn-pink" style="justify-content:center;">Versturen &rarr;</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-wrapper">
       <div><div class="brand-name">THE NAHARI LADY'S</div> &copy; 2026</div>
       <div class="social-icons">
         <a href="https://www.tiktok.com" target="_blank" rel="noopener" class="icon-tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.4 2.1 1.8 3.7 4 4.1v2.7c-1.4 0-2.8-.4-4-1.2v6.6c0 3.3-2.7 5.8-5.9 5.6-2.9-.2-5.2-2.6-5.3-5.5-.1-3.2 2.4-5.9 5.6-6v2.8c-1.5.1-2.7 1.4-2.6 2.9.1 1.5 1.4 2.6 2.9 2.5 1.4-.1 2.5-1.3 2.5-2.7V3h2.8z"/></svg></a>
         <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="icon-whatsapp" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.45 1.29 4.9L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.13.07-1.82-.12-.42-.12-.96-.3-1.65-.6-2.9-1.25-4.8-4.15-4.94-4.34-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.3.38-.43.51-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .12.11.34.29.44.42.29.25.6.5.94.29.15-.1.14-.11.26-.16z"/></svg></a>
-        <a href="https://facebook.com" target="_blank" rel="noopener" class="icon-facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5h2.5l.5-3h-3V8.5c0-.87.24-1.46 1.5-1.46h1.6V4.34C15.8 4.24 14.9 4.13 13.9 4.13c-2.1 0-3.5 1.28-3.5 3.63V10.5H8v3h2.4V21h3.1z"/></svg></a>
+        
       </div>
       <div>Comfort &bull; Safety &bull; Respect</div>
     </div>
   </footer>
 
-  <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.45 1.29 4.9L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.13.07-1.82-.12-.42-.12-.96-.3-1.65-.6-2.9-1.25-4.8-4.15-4.94-4.34-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.3.38-.43.51-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .12.11.34.29.44.42.29.25.6.5.94.29.15-.1.14-.11.26-.16z"/></svg>
-  </a>
+  <!-- JAVASCRIPT -->
+  <script>
+    // PRELOADER
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+      }, 800);
+    });
 
-  <script src="assets/script.js"></script>
-  <script src="assets/booking.js"></script>
+    // SCROLL ANIMATIES (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+    // MOBIEL MENU
+    function toggleMenu() {
+      document.getElementById('mobileSidebar').classList.toggle('active');
+      document.getElementById('mobileOverlay').classList.toggle('active');
+      document.getElementById('hamburgerBtn').classList.toggle('active');
+      if (!document.getElementById('mobileSidebar').classList.contains('active')) {
+        document.getElementById('mobilePreview').classList.remove('active');
+      }
+    }
+
+    // HOVER PREVIEW DESKTOP
+    const previewBox = document.getElementById('hoverPreview');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        const imgUrl = link.getAttribute('data-img');
+        if (imgUrl) {
+          previewBox.style.backgroundImage = `url('${imgUrl}')`;
+          previewBox.style.opacity = '1';
+          previewBox.style.transform = 'scale(1)';
+        }
+      });
+      link.addEventListener('mousemove', (e) => {
+        previewBox.style.left = (e.clientX + 15) + 'px';
+        previewBox.style.top = (e.clientY + 15) + 'px';
+      });
+      link.addEventListener('mouseleave', () => {
+        previewBox.style.opacity = '0';
+        previewBox.style.transform = 'scale(0.8)';
+      });
+    });
+
+    // HOVER/TAP PREVIEW MOBIEL MENU (achtergrond bovenin sidebar)
+    const mobilePreview = document.getElementById('mobilePreview');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    mobileLinks.forEach(link => {
+      const imgUrl = link.getAttribute('data-img');
+      const showPreview = () => {
+        if (imgUrl) {
+          mobilePreview.style.backgroundImage = `url('${imgUrl}')`;
+          mobilePreview.classList.add('active');
+        }
+      };
+      link.addEventListener('mouseenter', showPreview);
+      link.addEventListener('focus', showPreview);
+      link.addEventListener('touchstart', showPreview, { passive: true });
+    });
+
+    // 2-STAPS BOEKINGSSYSTEEM LOGICA
+    function goToStep2() {
+      const naam = document.getElementById('naam').value;
+      const telefoon = document.getElementById('telefoon').value;
+      const ophaal = document.getElementById('ophaal').value;
+      const bestemming = document.getElementById('bestemming').value;
+      const datum = document.getElementById('datum').value;
+      const tijd = document.getElementById('tijd').value;
+
+      if (!naam || !telefoon || !ophaal || !bestemming || !datum || !tijd) {
+        alert('Vul a.u.b. alle verplichte velden van Stap 1 in.');
+        return;
+      }
+
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+    }
+
+    function goToStep1() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
+
+    let isDiscounted = false;
+    function applyDiscount() {
+      const code = document.getElementById('kortingscode').value.trim().toUpperCase();
+      const priceDisplay = document.getElementById('priceDisplay');
+      const discountTag = document.getElementById('discountTag');
+
+      if (code === 'WELKOM10' && !isDiscounted) {
+        isDiscounted = true;
+        priceDisplay.innerText = '€ 13,50 - € 19,80';
+        discountTag.style.display = 'block';
+        alert('Kortingscode WELKOM10 succesvol toegepast!');
+      } else if (isDiscounted) {
+        alert('Korting is al toegepast op deze aanvraag.');
+      } else {
+        alert('Ongeldige kortingscode. Probeer bijv. WELKOM10');
+      }
+    }
+
+    function handleBookingSubmit(e) {
+      e.preventDefault();
+      const naam = document.getElementById('naam').value;
+      alert(`Bedankt ${naam}! Je rit-aanvraag is succesvol ontvangen. We nemen zo snel mogelijk contact op om de rit te bevestigen.`);
+      document.getElementById('bookingForm').reset();
+      goToStep1();
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert('Bedankt voor je bericht! We nemen binnen 24 uur contact met je op.');
+      e.target.reset();
+    }
+  </script>
+<a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.45 1.29 4.9L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.16c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.13.07-1.82-.12-.42-.12-.96-.3-1.65-.6-2.9-1.25-4.8-4.15-4.94-4.34-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.02-2.42.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.83 2 .9 2.15.07.15.12.32.02.51-.1.19-.15.31-.29.48-.15.17-.3.38-.43.51-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2 .12.11.34.29.44.42.29.25.6.5.94.29.15-.1.14-.11.26-.16z"/></svg>
+</a>
 </body>
 </html>
