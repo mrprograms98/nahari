@@ -419,41 +419,89 @@
     // PRELOADER
     window.addEventListener('load', () => {
       const preloader = document.getElementById('preloader');
-      if (preloader) {
-        setTimeout(() => {
-          preloader.style.opacity = '0';
-          preloader.style.visibility = 'hidden';
-        }, 800);
-      }
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        preloader.style.visibility = 'hidden';
+      }, 800);
     });
+
+    // SCROLL ANIMATIES (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
     // MOBIEL MENU
     function toggleMenu() {
       document.getElementById('mobileSidebar').classList.toggle('active');
       document.getElementById('mobileOverlay').classList.toggle('active');
       document.getElementById('hamburgerBtn').classList.toggle('active');
+      if (!document.getElementById('mobileSidebar').classList.contains('active')) {
+        document.getElementById('mobilePreview').classList.remove('active');
+      }
     }
 
-    // FORMULIER STAP NAVIGATIE
-    function goToStep2() {
-      const ophaal = document.getElementById('ophaal').value.trim();
-      const bestemming = document.getElementById('bestemming').value.trim();
+    // HOVER PREVIEW DESKTOP
+    const previewBox = document.getElementById('hoverPreview');
+    const navLinks = document.querySelectorAll('.nav-links a');
 
-      if (!ophaal || !bestemming) {
-        alert('Vul a.u.b. ten minste de ophaallocatie en bestemming in.');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        const imgUrl = link.getAttribute('data-img');
+        if (imgUrl) {
+          previewBox.style.backgroundImage = `url('${imgUrl}')`;
+          previewBox.style.opacity = '1';
+          previewBox.style.transform = 'scale(1)';
+        }
+      });
+      link.addEventListener('mousemove', (e) => {
+        previewBox.style.left = (e.clientX + 15) + 'px';
+        previewBox.style.top = (e.clientY + 15) + 'px';
+      });
+      link.addEventListener('mouseleave', () => {
+        previewBox.style.opacity = '0';
+        previewBox.style.transform = 'scale(0.8)';
+      });
+    });
+
+    // HOVER/TAP PREVIEW MOBIEL MENU (achtergrond bovenin sidebar)
+    const mobilePreview = document.getElementById('mobilePreview');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-links a');
+
+    mobileLinks.forEach(link => {
+      const imgUrl = link.getAttribute('data-img');
+      const showPreview = () => {
+        if (imgUrl) {
+          mobilePreview.style.backgroundImage = `url('${imgUrl}')`;
+          mobilePreview.classList.add('active');
+        }
+      };
+      link.addEventListener('mouseenter', showPreview);
+      link.addEventListener('focus', showPreview);
+      link.addEventListener('touchstart', showPreview, { passive: true });
+    });
+
+    // 2-STAPS BOEKINGSSYSTEEM LOGICA
+    function goToStep2() {
+      const naam = document.getElementById('naam').value;
+      const telefoon = document.getElementById('telefoon').value;
+      const ophaal = document.getElementById('ophaal').value;
+      const bestemming = document.getElementById('bestemming').value;
+      const datum = document.getElementById('datum').value;
+      const tijd = document.getElementById('tijd').value;
+
+      if (!naam || !telefoon || !ophaal || !bestemming || !datum || !tijd) {
+        alert('Vul a.u.b. alle verplichte velden van Stap 1 in.');
         return;
       }
 
       document.getElementById('step1').style.display = 'none';
       document.getElementById('step2').style.display = 'block';
-
-      // Kaart initialiseren en maten verversen na zichtbaarheid
-      initRouteMap();
-      setTimeout(() => {
-        if (routeMap) routeMap.invalidateSize();
-      }, 200);
-
-      calculateRouteAndPrice();
     }
 
     function goToStep1() {
@@ -461,24 +509,24 @@
       document.getElementById('step1').style.display = 'block';
     }
 
-    // KORTINGSCODE
-    let discountMultiplier = 1.0;
+    let isDiscounted = false;
     function applyDiscount() {
       const code = document.getElementById('kortingscode').value.trim().toUpperCase();
-      const tag = document.getElementById('discountTag');
-      if (code === 'WELKOM10') {
-        discountMultiplier = 0.9;
-        tag.style.display = 'block';
-        alert('10% kortingscode succesvol toegepast!');
+      const priceDisplay = document.getElementById('priceDisplay');
+      const discountTag = document.getElementById('discountTag');
+
+      if (code === 'WELKOM10' && !isDiscounted) {
+        isDiscounted = true;
+        priceDisplay.innerText = '€ 13,50 - € 19,80';
+        discountTag.style.display = 'block';
+        alert('Kortingscode WELKOM10 succesvol toegepast!');
+      } else if (isDiscounted) {
+        alert('Korting is al toegepast op deze aanvraag.');
       } else {
-        discountMultiplier = 1.0;
-        tag.style.display = 'none';
-        alert('Ongeldige kortingscode.');
+        alert('Ongeldige kortingscode. Probeer bijv. WELKOM10');
       }
-      updatePriceDisplay();
     }
 
-    // BOEKING SUBMIT
     function handleBookingSubmit(e) {
       e.preventDefault();
       const naam = document.getElementById('naam').value;
@@ -487,99 +535,10 @@
       goToStep1();
     }
 
-    // ROUTE & PRIJS BEREKENING (LEAFLET + OSRM)
-    let routeMap, routeLine, markerStart, markerEnd;
-    let baseDistanceKm = 0;
-
-    function initRouteMap() {
-      if (routeMap) return;
-      routeMap = L.map('routeMap').setView([51.4816, 5.6611], 9); // Helmond
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap bijdragers'
-      }).addTo(routeMap);
-    }
-
-    async function geocodeAddress(address) {
-      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=nl&q=${encodeURIComponent(address)}`;
-      try {
-        const res = await fetch(url, { headers: { 'Accept-Language': 'nl' } });
-        const data = await res.json();
-        if (data && data.length > 0) {
-          return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
-        }
-      } catch (e) {
-        console.error("Geocoding fout:", e);
-      }
-      return null;
-    }
-
-    function updatePriceDisplay() {
-      if (baseDistanceKm <= 0) return;
-      
-      // Berekening: Starttarief €5.00 + €1.20 per km
-      let calculatedPrice = 5.00 + (baseDistanceKm * 1.20);
-      calculatedPrice = calculatedPrice * discountMultiplier;
-
-      const priceDisplay = document.getElementById('priceDisplay');
-      priceDisplay.innerText = `€ ${calculatedPrice.toFixed(2).replace('.', ',')}`;
-    }
-
-    async function calculateRouteAndPrice() {
-      const ophaal = document.getElementById('ophaal').value.trim();
-      const bestemming = document.getElementById('bestemming').value.trim();
-      const routeInfo = document.getElementById('routeInfo');
-
-      if (!ophaal || !bestemming) return;
-
-      routeInfo.innerText = 'Route wordt berekend...';
-
-      const [start, end] = await Promise.all([geocodeAddress(ophaal), geocodeAddress(bestemming)]);
-
-      if (!start || !end) {
-        routeInfo.innerText = 'Kon één van de adressen niet vinden. Controleer de invoer.';
-        return;
-      }
-
-      // OSRM API voor route
-      const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${start.lon},${start.lat};${end.lon},${end.lat}?overview=full&geometries=geojson`;
-      
-      try {
-        const routeRes = await fetch(osrmUrl);
-        const routeData = await routeRes.json();
-
-        if (!routeData.routes || routeData.routes.length === 0) {
-          routeInfo.innerText = 'Route kon niet worden berekend.';
-          return;
-        }
-
-        const route = routeData.routes[0];
-        baseDistanceKm = route.distance / 1000; // Meters naar KM
-        const durationMin = Math.round(route.duration / 60);
-
-        // Oude markers/lijnen opschonen
-        if (routeLine) routeMap.removeLayer(routeLine);
-        if (markerStart) routeMap.removeLayer(markerStart);
-        if (markerEnd) routeMap.removeLayer(markerEnd);
-
-        // Nieuwe route tekenen
-        const geojson = route.geometry;
-        routeLine = L.geoJSON(geojson, {
-          style: { color: '#E08183', weight: 5, opacity: 0.8 }
-        }).addTo(routeMap);
-
-        markerStart = L.marker([start.lat, start.lon]).addTo(routeMap).bindPopup('Ophaal: ' + ophaal);
-        markerEnd = L.marker([end.lat, end.lon]).addTo(routeMap).bindPopup('Bestemming: ' + bestemming);
-
-        // Zoom kaart naar de route
-        routeMap.fitBounds(routeLine.getBounds(), { padding: [20, 20] });
-
-        routeInfo.innerText = `Afstand: ${baseDistanceKm.toFixed(1)} km | Geschatte reistijd: ${durationMin} min`;
-        updatePriceDisplay();
-
-      } catch (err) {
-        console.error(err);
-        routeInfo.innerText = 'Er is een fout opgetreden bij het berekenen van de route.';
-      }
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert('Bedankt voor je bericht! We nemen binnen 24 uur contact met je op.');
+      e.target.reset();
     }
   </script>
 <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
