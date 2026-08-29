@@ -511,47 +511,6 @@
       link.addEventListener('touchstart', showPreview, { passive: true });
     });
 
-    // 2-STAPS BOEKINGSSYSTEEM LOGICA
-    function goToStep2() {
-      const naam = document.getElementById('naam').value;
-      const telefoon = document.getElementById('telefoon').value;
-      const ophaal = document.getElementById('ophaal').value;
-      const bestemming = document.getElementById('bestemming').value;
-      const datum = document.getElementById('datum').value;
-      const tijd = document.getElementById('tijd').value;
-
-      if (!naam || !telefoon || !ophaal || !bestemming || !datum || !tijd) {
-        alert('Vul a.u.b. alle verplichte velden van Stap 1 in.');
-        return;
-      }
-
-      document.getElementById('step1').style.display = 'none';
-      document.getElementById('step2').style.display = 'block';
-    }
-
-    function goToStep1() {
-      document.getElementById('step2').style.display = 'none';
-      document.getElementById('step1').style.display = 'block';
-    }
-
-    let isDiscounted = false;
-    function applyDiscount() {
-      const code = document.getElementById('kortingscode').value.trim().toUpperCase();
-      const priceDisplay = document.getElementById('priceDisplay');
-      const discountTag = document.getElementById('discountTag');
-
-      if (code === 'WELKOM10' && !isDiscounted) {
-        isDiscounted = true;
-        priceDisplay.innerText = '€ 13,50 - € 19,80';
-        discountTag.style.display = 'block';
-        alert('Kortingscode WELKOM10 succesvol toegepast!');
-      } else if (isDiscounted) {
-        alert('Korting is al toegepast op deze aanvraag.');
-      } else {
-        alert('Ongeldige kortingscode. Probeer bijv. WELKOM10');
-      }
-    }
-
     function handleBookingSubmit(e) {
       e.preventDefault();
       const naam = document.getElementById('naam').value;
@@ -569,7 +528,6 @@
         // ROUTE & PRIJS BEREKENING
     let routeMap, routeLine, markerStart, markerEnd;
     let baseDistanceKm = 0;
-    let isDiscounted = false;
 
     function initRouteMap() {
       if (routeMap) return;
