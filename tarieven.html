@@ -6,6 +6,26 @@
   <title>Tarieven | THE NAHARI LADY'S</title>
   <meta name="description" content="Bekijk de tarieven van The Nahari Lady's ladies only taxi.">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    .route-map {
+  width: 100%;
+  height: 240px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  margin-top: 5px;
+  overflow: hidden;
+  background: var(--turquoise-light);
+}
+.route-info {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  text-align: center;
+}
+.leaflet-popup-content { font-family: var(--font-sans); font-size: 0.8rem; }  
+  </style>
 </head>
 <body>
 
@@ -323,11 +343,17 @@
             </div>
             
             <div class="form-group full-width">
+              <label>Route</label>
+              <div id="routeMap" class="route-map"></div>
+              <div id="routeInfo" class="route-info">Vul ophaallocatie en bestemming in bij Stap 1.</div>
+            </div>
+
+            <div class="form-group full-width">
               <div class="price-estimate-box">
                 <h4>Geschatte Ritprijs</h4>
                 <div class="price-amount" id="priceDisplay">€ 15,00 - € 22,00</div>
                 <div class="discount-tag" id="discountTag">10% korting toegepast!</div>
-                <small style="font-size: 0.7rem; color: var(--text-muted);">(Definitief tarief wordt vooraf in overleg bevestigd)</small>
+                <small style="font-size: 0.7rem; color: var(--text-muted);">(Definitief tarief wordt vooraf in overleg bevestigd &mdash; prijzen kunnen afwijken door verkeersomstandigheden)</small>
               </div>
             </div>
 
@@ -538,6 +564,146 @@
       e.preventDefault();
       alert('Bedankt voor je bericht! We nemen binnen 24 uur contact met je op.');
       e.target.reset();
+    }
+        // ROUTE & PRIJS BEREKENING
+    let routeMap, routeLine, markerStart, markerEnd;
+    let baseDistanceKm = 0;
+    let isDiscounted = false;
+
+    function initRouteMap() {
+      if (routeMap) return;
+      routeMap = L.map('routeMap').setView([51.4816, 5.6611], 9); // Helmond centrum
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap bijdragers'
+      }).addTo(routeMap);
+    }
+
+    async function geocodeAddress(address) {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=nl&q=${encodeURIComponent(address)}`;
+      const res = await fetch(url, { headers: { 'Accept-Language': 'nl' } });
+      const data = await res.json();
+      if (data && data.length > 0) {
+        return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+      }
+      return null;
+    }
+
+    async function calculateRouteAndPrice() {
+      const ophaal = document.getElementById('ophaal').value.trim();
+      const bestemming = document.getElementById('bestemming').value.trim();
+      const routeInfo = document.getElementById('routeInfo');
+
+      if (!ophaal || !bestemming) return;
+
+      initRouteMap();
+      routeInfo.innerText = 'Route wordt berekend...';
+
+      try {
+        const [start, end] = await Promise.all([geocodeAddress(ophaal), geocodeAddress(bestemming)]);
+
+        if (!start || !end) {
+          routeInfo.innerText = 'Kon één van de adressen niet vinden. Controleer de invoer.';
+          return;
+        }
+
+        const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${start.lon},${start.lat};${end.lon},${end.lat}?overview=full&geometries=geojson`;
+        const routeRes = await fetch(osrmUrl);
+        const routeData = await routeRes.json();
+
+        if (!routeData.routes || routeData.routes.length === 0) {
+          routeInfo.innerText = 'Route kon niet worden berekend.';
+          return;
+        }
+
+        const route = routeData.routes[0];
+        baseDistanceKm = route.distance / 1000;
+        const durationMin = Math.round(route.duration / 60);
+
+        if (routeLine) routeMap.removeLayer(routeLine);
+        if (markerStart) routeMap.removeLayer(markerStart);
+        if (markerEnd) routeMap.removeLayer(markerEnd);
+
+        const coords = route.geometry.coordinates.map(c => [c[1], c[0]]);
+        routeLine = L.polyline(coords, { color: '#E08183', weight: 5 }).addTo(routeMap);
+        markerStart = L.marker([start.lat, start.lon]).addTo(routeMap).bindPopup('Ophaallocatie: ' + ophaal);
+        markerEnd = L.marker([end.lat, end.lon]).addTo(routeMap).bindPopup('Bestemming: ' + bestemming);
+        routeMap.fitBounds(routeLine.getBounds(), { padding: [25, 25] });
+
+        routeInfo.innerText = `${baseDistanceKm.toFixed(1)} km — ca. ${durationMin} min rijden (buiten spits; kan afwijken door verkeersomstandigheden)`;
+
+        updatePriceEstimate();
+
+      } catch (err) {
+        routeInfo.innerText = 'Route kon niet worden berekend. Probeer het later opnieuw.';
+        console.error(err);
+      }
+    }
+
+    function updatePriceEstimate() {
+      const priceDisplay = document.getElementById('priceDisplay');
+
+      if (!baseDistanceKm || baseDistanceKm <= 0) {
+        priceDisplay.innerText = '€ 15,00 - € 22,00';
+        return;
+      }
+
+      const startTarief = 5.00;
+      const perKm = 1.20;
+      const basePrice = startTarief + (baseDistanceKm * perKm);
+
+      let low = basePrice * 0.92;
+      let high = basePrice * 1.20;
+
+      if (isDiscounted) {
+        low *= 0.9;
+        high *= 0.9;
+      }
+
+      priceDisplay.innerText = `€ ${low.toFixed(2).replace('.', ',')} - € ${high.toFixed(2).replace('.', ',')}`;
+    }
+
+    // 2-STAPS BOEKINGSSYSTEEM LOGICA
+    function goToStep2() {
+      const naam = document.getElementById('naam').value;
+      const telefoon = document.getElementById('telefoon').value;
+      const ophaal = document.getElementById('ophaal').value;
+      const bestemming = document.getElementById('bestemming').value;
+      const datum = document.getElementById('datum').value;
+      const tijd = document.getElementById('tijd').value;
+
+      if (!naam || !telefoon || !ophaal || !bestemming || !datum || !tijd) {
+        alert('Vul a.u.b. alle verplichte velden van Stap 1 in.');
+        return;
+      }
+
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step2').style.display = 'block';
+
+      setTimeout(() => {
+        calculateRouteAndPrice();
+        if (routeMap) routeMap.invalidateSize();
+      }, 100);
+    }
+
+    function goToStep1() {
+      document.getElementById('step2').style.display = 'none';
+      document.getElementById('step1').style.display = 'block';
+    }
+
+    function applyDiscount() {
+      const code = document.getElementById('kortingscode').value.trim().toUpperCase();
+      const discountTag = document.getElementById('discountTag');
+
+      if (code === 'WELKOM10' && !isDiscounted) {
+        isDiscounted = true;
+        discountTag.style.display = 'block';
+        updatePriceEstimate();
+        alert('Kortingscode WELKOM10 succesvol toegepast!');
+      } else if (isDiscounted) {
+        alert('Korting is al toegepast op deze aanvraag.');
+      } else {
+        alert('Ongeldige kortingscode. Probeer bijv. WELKOM10');
+      }
     }
   </script>
 <a href="https://wa.me/31612345678" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
