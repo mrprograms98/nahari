@@ -525,3 +525,152 @@
 @media (max-width: 600px) {
   .review-card { flex: 0 0 220px; }
 }
+
+
+/* KINDERZITJE & VOORKEUR RADIO GROEPEN */
+.radio-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.radio-option { position: relative; }
+.radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.radio-option label {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--bg-cream);
+  color: var(--text-dark);
+  transition: all 0.25s ease;
+}
+.radio-option input[type="radio"]:checked + label {
+  background: var(--pink-main);
+  border-color: var(--pink-main);
+  color: #FFF;
+}
+.radio-option label:hover { border-color: var(--pink-main); }
+
+/* OVER ONS INTRO BINNEN HET ROZE KADER, BOVEN DE FOTO */
+.about-intro-inline {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.about-intro-inline p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* CHECKBOX "BESTEMMING IS EEN VLIEGVELD" */
+.checkbox-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.checkbox-inline input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--pink-main);
+  cursor: pointer;
+}
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(to right, var(--pink-main), var(--gold-accent), var(--turquoise-main));
+  z-index: 3000; transition: width 0.1s ease-out;
+}
+header { transition: padding 0.3s ease, box-shadow 0.3s ease; }
+header.shrink { box-shadow: 0 4px 18px rgba(0,0,0,0.08); }
+.logo-img { transition: height 0.3s ease; }
+header.shrink .logo-img { height: 48px; }
+.btn-pink { position: relative; overflow: hidden; }
+.ripple-span {
+  position: absolute; border-radius: 50%; transform: scale(0);
+  background: rgba(255,255,255,0.55); animation: rippleAnim 0.6s linear; pointer-events: none;
+}
+@keyframes rippleAnim { to { transform: scale(3.5); opacity: 0; } }
+
+.toast-container {
+  position: fixed; top: 20px; right: 20px; z-index: 4000;
+  display: flex; flex-direction: column; gap: 10px; max-width: 320px;
+}
+.toast {
+  background: #FFF; border-left: 4px solid var(--turquoise-main); border-radius: 8px;
+  padding: 14px 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  font-size: 0.82rem; color: var(--text-dark);
+  transform: translateX(120%); opacity: 0;
+  animation: toastIn 0.4s ease forwards;
+}
+.toast.toast-error { border-left-color: var(--pink-main); }
+.toast.toast-out { animation: toastOut 0.4s ease forwards; }
+@keyframes toastIn { to { transform: translateX(0); opacity: 1; } }
+@keyframes toastOut { to { transform: translateX(120%); opacity: 0; } }
+
+.back-to-top {
+  position: fixed; bottom: 25px; right: 95px; width: 46px; height: 46px; border-radius: 50%;
+  background: #FFF; border: 1.5px solid var(--gold-accent); color: var(--gold-accent);
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15); z-index: 1500;
+  opacity: 0; visibility: hidden; transform: translateY(15px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { background: var(--gold-accent); color: #FFF; }
+.back-to-top svg { width: 20px; height: 20px; }
+.quick-call-float {
+  position: fixed; bottom: 25px; left: 25px; z-index: 1500;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--turquoise-main); color: #FFF; padding: 12px 18px; border-radius: 30px;
+  font-size: 0.8rem; font-weight: 600; box-shadow: 0 6px 18px rgba(99,181,183,0.4);
+  opacity: 0; visibility: hidden; transform: translateY(15px) scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+.quick-call-float.visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.quick-call-float svg { width: 18px; height: 18px; }
+@media (max-width: 600px) {
+  .quick-call-float span { display: none; }
+  .quick-call-float { padding: 13px; }
+}
+.booking-success { display: none; text-align: center; padding: 40px 20px; flex-direction: column; align-items: center; gap: 8px; }
+.booking-success.active { display: flex; animation: fadeInUpSoft 0.5s ease; }
+@keyframes fadeInUpSoft { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.success-checkmark { width: 70px; height: 70px; margin-bottom: 10px; }
+.success-checkmark svg { width: 100%; height: 100%; }
+.success-checkmark circle {
+  stroke: var(--turquoise-main); stroke-width: 3; stroke-dasharray: 151; stroke-dashoffset: 151;
+  animation: circleDraw 0.6s ease forwards;
+}
+.success-checkmark path {
+  stroke: var(--turquoise-main); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 40; stroke-dashoffset: 40;
+  animation: checkDraw 0.4s ease forwards 0.55s;
+}
+@keyframes circleDraw { to { stroke-dashoffset: 0; } }
+@keyframes checkDraw { to { stroke-dashoffset: 0; } }
+.confetti-piece {
+  position: fixed; top: -10px; width: 8px; height: 14px; z-index: 5000; pointer-events: none;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall { to { transform: translateY(105vh) rotate(600deg); opacity: 0.9; } }
+.reviews-dots { display: flex; justify-content: center; gap: 8px; margin-top: 8px; }
+.reviews-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--border-color);
+  border: none; cursor: pointer; transition: background 0.3s ease, transform 0.3s ease;
+}
+.reviews-dot.active { background: var(--gold-accent); transform: scale(1.3); }
